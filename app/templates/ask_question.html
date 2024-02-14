@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+{% block head %}
+    <title>Ваш вопрос</title>
+{% endblock%}
+{% block content %}
+    <div style='display:flex; flex-direction:column; justify-content:center; align-items:center; width:fit-content;' class="container-fluid white border border-dark py-3">
+        <form autocomplete="off" method="POST">
+
+            <div style="width: fit-content; margin: auto;padding-bottom: 15px;font-size:16px">
+                <input id="add_question" type="text" placeholder="Введите вопрос: " class="text-xl">
+
+                <form action="{{ url_for 'get_answer' }}">
+                    <input type="submit" class="btn btn-outline-primary text-dark btn-block text-black"
+                           style="width:190px;height:35px;border-radius: 10px" value="Получить ответ" />
+                </form>
+            </div>
+
+            {% for question in context %}
+                <h4>Ваш вопрос: </h4>
+                <p>{{ question.text }}</p>
+                <h4>Задали раз: </h4>
+                <p>{{ question.amount }}</p>
+            {% endfor %}
+
+        </form>
+    </div>
+
+{% endblock %}
