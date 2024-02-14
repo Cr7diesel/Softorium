@@ -80,7 +80,7 @@ async def started_page(request: Request):
     return templates.TemplateResponse("index.html", {"request": request, "context": context})
 
 
-@router.post("/ask_question", response_model=SchemaQuestion)
+@app.post('/ask_question', response_model=SchemaQuestion)
 async def ask_question(question: SchemaQuestion, request: Request):
     asked_question = db.session.query(Question).filter(user=request.user,
                                                        text=question.text).first()
@@ -104,7 +104,7 @@ async def ask_question(question: SchemaQuestion, request: Request):
     return templates.TemplateResponse("ask_question.html", {"request": request, "context": context})
 
 
-@router.get('/get_answer')
+@app.get('/get_answer')
 async def get_answer(request: Request):
     CHOICES = (
         "Да", "Нет", "Возможно", "Вопрос не ясен",
